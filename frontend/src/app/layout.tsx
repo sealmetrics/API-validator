@@ -6,11 +6,16 @@ export const metadata: Metadata = {
   description: 'Validate and test Sealmetrics API endpoints with real-time response analysis',
   keywords: ['API', 'Validator', 'Sealmetrics', 'Analytics', 'Testing'],
   authors: [{ name: 'Sealmetrics' }],
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/logo.png',
+  },
   openGraph: {
     title: 'API Validator | Sealmetrics',
     description: 'Validate and test Sealmetrics API endpoints with real-time response analysis',
     type: 'website',
     url: 'https://api-validator.sealmetrics.com',
+    images: ['/logo.png'],
   },
 }
 
