@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --foreground-rgb: 15, 23, 42;
+  --background-rgb: 248, 250, 252;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 248, 250, 252;
+    --background-rgb: 15, 23, 42;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.dark body {
+  --foreground-rgb: 248, 250, 252;
+  --background-rgb: 15, 23, 42;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+/* JSON syntax highlighting */
+.json-key {
+  color: #6366f1;
+}
+
+.json-string {
+  color: #10b981;
+}
+
+.json-number {
+  color: #f59e0b;
+}
+
+.json-boolean {
+  color: #ec4899;
+}
+
+.json-null {
+  color: #94a3b8;
+}
+
+/* Status indicators */
+.status-healthy {
+  @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400;
+}
+
+.status-degraded {
+  @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400;
+}
+
+.status-unhealthy {
+  @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400;
+}
+
+/* Animation */
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: rgba(99, 102, 241, 0.5);
+  }
+  50% {
+    border-color: rgba(99, 102, 241, 1);
+  }
+}
+
+.loading-border {
+  animation: pulse-border 1.5s ease-in-out infinite;
+}

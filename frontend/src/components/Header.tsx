@@ -1,0 +1,47 @@
+'use client'
+
+import { Activity, ExternalLink } from 'lucide-react'
+
+export function Header() {
+  return (
+    <header className="border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600">
+              <Activity className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold text-slate-900 dark:text-white">
+                API Validator
+              </h1>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Sealmetrics
+              </p>
+            </div>
+          </div>
+          <nav className="flex items-center gap-4">
+            <a
+              href="https://docs.sealmetrics.com/api"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors"
+            >
+              API Docs
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="https://app.sealmetrics.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-sm text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors"
+            >
+              Dashboard
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </nav>
+        </div>
+      </div>
+    </header>
+  )
+}
