@@ -7,14 +7,14 @@ export function Header() {
   return (
     <header className="border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between py-6">
           <div className="flex items-center gap-3">
             <Image
               src="/logo.svg"
               alt="Sealmetrics"
-              width={360}
-              height={80}
-              className="w-[360px] h-20"
+              width={180}
+              height={40}
+              className="w-[180px] h-10"
             />
             <div>
               <h1 className="text-lg font-semibold text-slate-900 dark:text-white">
