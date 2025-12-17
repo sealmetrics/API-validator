@@ -135,12 +135,12 @@ export function TokenInput({ onValidated, isValidated }: TokenInputProps) {
         <p className="text-xs text-slate-500 dark:text-slate-400">
           Find your API token in{' '}
           <a
-            href="https://app.sealmetrics.com/settings/tags-connectors"
+            href="https://app.sealmetrics.com/connectors"
             target="_blank"
             rel="noopener noreferrer"
             className="text-indigo-600 dark:text-indigo-400 hover:underline"
           >
-            Settings → Tags & Connectors → Connectors
+            Connectors
           </a>
         </p>
       </div>

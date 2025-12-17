@@ -37,10 +37,21 @@ class SealmetricsClient:
 
                 if response.status_code == 200:
                     data = response.json()
-                    accounts = data.get("data", data) if isinstance(data, dict) else data
-                    if isinstance(accounts, list):
-                        return True, accounts, None
-                    return True, [accounts] if accounts else [], None
+                    # Handle different response formats
+                    if isinstance(data, dict):
+                        # Check if it's a {data: [...]} response
+                        if "data" in data and isinstance(data["data"], list):
+                            accounts = data["data"]
+                        # Check if it's a {id: name, id: name, ...} format
+                        elif all(isinstance(k, str) and isinstance(v, str) for k, v in data.items()):
+                            accounts = [{"id": k, "name": v} for k, v in data.items()]
+                        else:
+                            accounts = [data]
+                    elif isinstance(data, list):
+                        accounts = data
+                    else:
+                        accounts = []
+                    return True, accounts, None
                 elif response.status_code == 401:
                     return False, [], "Invalid API token"
                 else:
