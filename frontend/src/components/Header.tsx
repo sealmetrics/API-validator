@@ -12,9 +12,9 @@ export function Header() {
             <Image
               src="/logo.svg"
               alt="Sealmetrics"
-              width={40}
+              width={180}
               height={40}
-              className="w-10 h-10"
+              className="w-[180px] h-10"
             />
             <div>
               <h1 className="text-lg font-semibold text-slate-900 dark:text-white">
