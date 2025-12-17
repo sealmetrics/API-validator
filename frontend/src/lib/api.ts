@@ -1,4 +1,19 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+function getApiBase() {
+  // Check env var first (for build-time config)
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL
+  }
+  // Runtime detection based on current hostname
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname
+    if (hostname === 'api-validator.sealmetrics.com') {
+      return 'https://api-validator-backend.sealmetrics.com'
+    }
+  }
+  return 'http://localhost:8000'
+}
+
+const API_BASE = getApiBase()
 
 export async function validateToken(apiToken: string) {
   const response = await fetch(`${API_BASE}/validate/token`, {
