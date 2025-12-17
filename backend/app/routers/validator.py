@@ -82,10 +82,8 @@ async def health_check(request: HealthCheckRequest):
                 "limit": 10,
             }
             # Add report_type for endpoints that require it
-            if endpoint_id == "report_acquisition":
+            if endpoint_id in ("report_acquisition", "report_funnel"):
                 params["report_type"] = "Source"
-            elif endpoint_id == "report_funnel":
-                params["report_type"] = "by_source"
 
         result = await client.validate_endpoint(endpoint_id, params)
         results.append(result)
