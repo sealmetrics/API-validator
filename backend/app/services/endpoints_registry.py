@@ -285,4 +285,4 @@ class EndpointsRegistry:
     @staticmethod
     def get_health_check_endpoints() -> list[str]:
         """Returns endpoint IDs used for quick health check."""
-        return ["auth_accounts", "report_acquisition", "report_conversions"]
+        return [e.id for e in EndpointsRegistry.get_all_endpoints()]

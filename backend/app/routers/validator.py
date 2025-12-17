@@ -78,7 +78,7 @@ async def health_check(request: HealthCheckRequest):
         if endpoint_id != "auth_accounts":
             params = {
                 "account_id": request.account_id,
-                "date_range": "last_7_days",
+                "date_range": "today",
                 "limit": 10,
             }
 
@@ -114,7 +114,7 @@ async def validate_batch(
     api_token: str,
     endpoint_ids: list[str],
     account_id: str,
-    date_range: str = "last_7_days",
+    date_range: str = "today",
 ):
     """
     Validate multiple endpoints in parallel.
