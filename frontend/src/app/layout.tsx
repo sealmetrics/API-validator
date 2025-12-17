@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   keywords: ['API', 'Validator', 'Sealmetrics', 'Analytics', 'Testing'],
   authors: [{ name: 'Sealmetrics' }],
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.svg',
     apple: '/logo.png',
   },
   openGraph: {

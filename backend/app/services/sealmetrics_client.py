@@ -116,15 +116,25 @@ class SealmetricsClient:
                 except Exception:
                     response_data = response.text
 
-                # Count data items if applicable
+                # Count data items and extract latest date if applicable
                 data_count = None
+                latest_data_date = None
+                data_list = None
+
                 if isinstance(response_data, dict):
                     if "data" in response_data and isinstance(response_data["data"], list):
-                        data_count = len(response_data["data"])
+                        data_list = response_data["data"]
+                        data_count = len(data_list)
                     elif "items" in response_data and isinstance(response_data["items"], list):
-                        data_count = len(response_data["items"])
+                        data_list = response_data["items"]
+                        data_count = len(data_list)
                 elif isinstance(response_data, list):
-                    data_count = len(response_data)
+                    data_list = response_data
+                    data_count = len(data_list)
+
+                # Extract latest date from data
+                if data_list:
+                    latest_data_date = self._extract_latest_date(data_list)
 
                 # Determine success
                 success = 200 <= response.status_code < 300
@@ -143,6 +153,7 @@ class SealmetricsClient:
                     request_params=clean_params,
                     response_data=response_data,
                     data_count=data_count,
+                    latest_data_date=latest_data_date,
                     error_message=None if success else self._extract_error(response_data),
                 )
 
@@ -182,4 +193,34 @@ class SealmetricsClient:
                 return str(response_data["message"])
             if "detail" in response_data:
                 return str(response_data["detail"])
+        return None
+
+    def _extract_latest_date(self, data_list: list) -> str | None:
+        """
+        Extract the latest date from a list of data items.
+        Supports formats:
+        - 'date' field with YYYYMMDD format (e.g., "20251117")
+        - '_id' field with YYYY-MM-DD format (e.g., "2025-11-17")
+        """
+        dates = []
+        for item in data_list:
+            if not isinstance(item, dict):
+                continue
+
+            # Try 'date' field (format: YYYYMMDD)
+            if "date" in item and isinstance(item["date"], str):
+                date_str = item["date"]
+                if len(date_str) == 8 and date_str.isdigit():
+                    # Convert YYYYMMDD to YYYY-MM-DD for consistency
+                    formatted = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:8]}"
+                    dates.append(formatted)
+
+            # Try '_id' field if it looks like a date (format: YYYY-MM-DD)
+            elif "_id" in item and isinstance(item["_id"], str):
+                id_str = item["_id"]
+                if len(id_str) == 10 and id_str[4] == "-" and id_str[7] == "-":
+                    dates.append(id_str)
+
+        if dates:
+            return max(dates)
         return None

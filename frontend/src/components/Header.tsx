@@ -16,14 +16,9 @@ export function Header() {
               height={40}
               className="w-[180px] h-10"
             />
-            <div>
-              <h1 className="text-lg font-semibold text-slate-900 dark:text-white">
-                API Validator
-              </h1>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Sealmetrics
-              </p>
-            </div>
+            <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">
+              API Validator
+            </h1>
           </div>
           <nav className="flex items-center gap-4">
             <a

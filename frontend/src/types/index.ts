@@ -29,6 +29,7 @@ export interface ValidationResult {
   response_data?: unknown
   error_message?: string
   data_count?: number
+  latest_data_date?: string
 }
 
 export interface HealthCheckResult {

@@ -84,6 +84,7 @@ class ValidationResult(BaseModel):
     response_data: Optional[Any] = None
     error_message: Optional[str] = None
     data_count: Optional[int] = None
+    latest_data_date: Optional[str] = None
 
 
 class HealthCheckRequest(BaseModel):

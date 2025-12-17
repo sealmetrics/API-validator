@@ -1,6 +1,6 @@
 'use client'
 
-import { CheckCircle2, XCircle, Clock, Database, Link2, Copy, Check } from 'lucide-react'
+import { CheckCircle2, XCircle, Clock, Database, Link2, Copy, Check, Calendar } from 'lucide-react'
 import type { ValidationResult } from '@/types'
 import { formatJson, formatResponseTime, getStatusColor, formatDate } from '@/lib/utils'
 import { useState } from 'react'
@@ -62,7 +62,7 @@ export function ResultViewer({ result }: ResultViewerProps) {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 divide-x divide-slate-200 dark:divide-slate-700 border-b border-slate-200 dark:border-slate-700">
+      <div className="grid grid-cols-4 divide-x divide-slate-200 dark:divide-slate-700 border-b border-slate-200 dark:border-slate-700">
         <div className="p-4 text-center">
           <div className="flex items-center justify-center gap-1.5 text-slate-500 dark:text-slate-400 mb-1">
             <Clock className="w-4 h-4" />
@@ -79,6 +79,15 @@ export function ResultViewer({ result }: ResultViewerProps) {
           </div>
           <p className="text-lg font-semibold text-slate-900 dark:text-white">
             {result.data_count ?? '-'}
+          </p>
+        </div>
+        <div className="p-4 text-center">
+          <div className="flex items-center justify-center gap-1.5 text-slate-500 dark:text-slate-400 mb-1">
+            <Calendar className="w-4 h-4" />
+            <span className="text-xs">Latest Data</span>
+          </div>
+          <p className="text-sm font-semibold text-slate-900 dark:text-white">
+            {result.latest_data_date ?? '-'}
           </p>
         </div>
         <div className="p-4 text-center">
