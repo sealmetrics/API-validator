@@ -127,31 +127,53 @@ export function HealthCheck({ apiToken, accounts }: HealthCheckProps) {
               {result.results.map((r) => (
                 <div
                   key={r.endpoint_id}
-                  className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-900/50"
+                  className="p-3 rounded-lg bg-slate-50 dark:bg-slate-900/50"
                 >
-                  <div className="flex items-center gap-2">
-                    {r.success ? (
-                      <CheckCircle2 className="w-4 h-4 text-green-500" />
-                    ) : (
-                      <XCircle className="w-4 h-4 text-red-500" />
-                    )}
-                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                      {r.endpoint_name}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="text-slate-500 dark:text-slate-400">
-                      {formatResponseTime(r.response_time_ms)}
-                    </span>
-                    <span
-                      className={cn(
-                        'font-mono',
-                        r.success ? 'text-green-600' : 'text-red-600'
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {r.success ? (
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                      ) : (
+                        <XCircle className="w-4 h-4 text-red-500" />
                       )}
-                    >
-                      {r.status_code || 'ERR'}
-                    </span>
+                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                        {r.endpoint_name}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <span className="text-slate-500 dark:text-slate-400">
+                        {formatResponseTime(r.response_time_ms)}
+                      </span>
+                      <span
+                        className={cn(
+                          'font-mono',
+                          r.success ? 'text-green-600' : 'text-red-600'
+                        )}
+                      >
+                        {r.status_code || 'ERR'}
+                      </span>
+                    </div>
                   </div>
+                  {r.success && (r.latest_data_date || r.data_count !== undefined) && (
+                    <div className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-700 flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
+                      {r.latest_data_date && (
+                        <span className="flex items-center gap-1">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          Latest: <span className="font-medium text-slate-700 dark:text-slate-300">{r.latest_data_date}</span>
+                        </span>
+                      )}
+                      {r.data_count !== undefined && r.data_count !== null && (
+                        <span className="flex items-center gap-1">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                          </svg>
+                          Rows: <span className="font-medium text-slate-700 dark:text-slate-300">{r.data_count.toLocaleString()}</span>
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
